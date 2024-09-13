@@ -1,1 +1,563 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"/><link rel="icon" href="/favicon.ico"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="theme-color" content="#000000"/><meta name="description" content="Web site created using create-react-app"/><link rel="apple-touch-icon" href="/logo192.png"/><link rel="manifest" href="/manifest.json"/><title>React App</title><script defer="defer" src="/static/js/main.4c92bd34.js"></script><link href="/static/css/main.073c9b0a.css" rel="stylesheet"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id="root"></div></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM Growth Bubble</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f4f8;
+            padding: 20px;
+            color: #333;
+            overflow: auto
+        }
+      text {
+            font-family: 'Roboto', sans-serif;
+      }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1000px;
+            width: 100%;
+            background-color: #ffffff;
+            padding: 16px 0 32px 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .inputs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            width: 95%;
+        }
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            padding: 5px;
+            margin: 0 3px 5px 0;
+            font-weight: 400;
+            font-size: 14px;
+            color: #555;
+            text-align: end;
+            width: 80%;
+        }
+        input[type="range"] {
+            width: 80%;
+            margin-top: 5px;
+            accent-color: rgba(37, 146, 219);
+           -webkit-appearance: none;
+            appearance: none;
+            height: 8px;
+            background: rgba(37, 146, 219, 0.3);
+            border-radius: 16px;
+        }
+        input[type="number"] {
+            padding: -3px 3px 0px 3px;
+            width: 40px;
+            border: 0px solid #ddd;
+            border-radius: 4px;
+            font-size: 36px;
+            font-weight: 800;
+            margin-left: auto;
+            color: rgba(37, 146, 219)
+             
+        }
+        #chart {
+            width: 910px;
+            height: 800px;
+        }
+        h1 {
+            font-weight: 700;
+            color: rgba(37, 146, 219);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .label-group {
+          display: flex;
+          flex-direction: row;
+          width: 90%;
+        }
+        .export-label {
+            font-family: 'Roboto', sans-serif;
+            font-size: 12px;
+            fill: #555;
+        }
+        #namePrompt {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background-color: white;
+                padding: 24px;
+                border-radius: 16px;
+                box-shadow: 1px 0px 0px 110vw rgb(0 0 0 / 20%);
+                z-index: 1000;
+                
+            }
+            #namePrompt input {
+                font-size: 20px;
+                font-weight: 600;
+                margin-right: 10px;
+                border: none;
+                
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="chartTitle">The PM Growth Bubble</h1>
+        <div id="chart"></div>
+        <div class="inputs">
+          
+            <div class="input-group">
+                <div class="label-group">
+                  <label for="curiosity">Curiosity and Critical Thinking</label>
+                  <input type="number" id="curiosity-value" min="0" max="10" value="5">
+                </div>
+              <input type="range" id="curiosity" min="0" max="10" value="5" step="1">
+            </div>
+          
+            <div class="input-group">
+                <div class="label-group">
+                  <label for="strategic">Strategic Thinking</label>
+                  <input type="number" id="strategic-value" min="0" max="10" value="5">
+                </div>
+                <input type="range" id="strategic" min="0" max="10" value="5" step="1">        
+            </div>
+          
+            <div class="input-group">
+              <div class="label-group">
+                  <label for="communication">Communication and Evangelism</label>
+                  <input type="number" id="communication-value" min="0" max="10" value="5">
+              </div>
+              <input type="range" id="communication" min="0" max="10" value="5" step="1">
+            </div>
+          
+            <div class="input-group">
+              <div class="label-group">
+                <label for="leadership">Leadership and Consciousness</label>
+                <input type="number" id="leadership-value" min="0" max="10" value="5">
+                </div>
+                <input type="range" id="leadership" min="0" max="10" value="5" step="1">    
+            </div>
+          
+            <div class="input-group">
+              <div class="label-group">
+                <label for="collaboration">Collaboration</label>
+                <input type="number" id="collaboration-value" min="0" max="10" value="5">
+                </div>
+                <input type="range" id="collaboration" min="0" max="10" value="5" step="1">
+            </div>
+          
+            <div class="input-group">
+              <div class="label-group">
+                <label for="driving">Driving Outcomes</label>
+                <input type="number" id="driving-value" min="0" max="10" value="5">
+                </div>
+                <input type="range" id="driving" min="0" max="10" value="5" step="1">
+            </div>
+          
+            <div class="input-group">
+              <div class="label-group">
+                <label for="company,">Company, Product and Domain Knowledge</label>
+                <input type="number" id="company,-value" min="0" max="10" value="5">
+                </div>
+                <input type="range" id="company," min="0" max="10" value="5" step="1">
+            </div>
+          
+            <div class="input-group">
+              <div class="label-group">
+                <label for="technology">Technology and Data Fundamentals</label>
+                <input type="number" id="technology-value" min="0" max="10" value="5">
+                </div>
+                <input type="range" id="technology" min="0" max="10" value="5" step="1">
+            </div>
+          
+            <div class="input-group">
+              <div class="label-group">
+                <label for="business">Business Acumen</label>
+                <input type="number" id="business-value" min="0" max="10" value="5">
+                </div>
+                <input type="range" id="business" min="0" max="10" value="5" step="1">
+            </div>
+            <div class="input-group">
+              <div class="label-group">
+                <label for="discovery">Discovery</label>
+                <input type="number" id="discovery-value" min="0" max="10" value="5">
+                </div>
+                <input type="range" id="discovery" min="0" max="10" value="5" step="1">
+            </div>
+        </div>
+        <div class="buttons">
+            <button id="download-png">Download PNG</button>
+        </div>
+    </div>
+    <div id="namePrompt" style="display: none;">
+        <input type="text" id="nameInput" placeholder="Enter your name">
+        <button id="submitName">Submit</button>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    try {
+        console.log("DOM content loaded, initializing chart...");
+
+        let userName = "";
+
+        function promptForName() {
+            const namePrompt = document.getElementById('namePrompt');
+            const nameInput = document.getElementById('nameInput');
+            const submitButton = document.getElementById('submitName');
+            const chartTitle = document.getElementById('chartTitle');
+
+            namePrompt.style.display = 'block';
+
+            submitButton.addEventListener('click', function() {
+                userName = nameInput.value.trim();
+                if (userName) {
+                    chartTitle.textContent = `${userName}'s PM Growth Bubble`;
+                    namePrompt.style.display = 'none';
+                }
+            });
+
+            nameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    submitButton.click();
+                }
+            });
+        }
+
+        promptForName();
+
+        const width = 910;
+        const height = 800;
+        const margin = 100;
+        const radius = Math.min(width, height) / 2.4 - margin;
+
+        console.log("Creating SVG element...");
+        const svg = d3.select("#chart")
+            .append("svg")
+            .attr("width", width)
+            .attr("height", height)
+            .append("g")
+            .attr("transform", `translate(${width/2},${height/2})`);
+
+        if (!svg.empty()) {
+            console.log("SVG element created successfully");
+        } else {
+            console.error("Failed to create SVG element");
+        }
+
+        console.log("Creating gradient...");
+        const gradient = svg.append("defs")
+            .append("radialGradient")
+            .attr("id", "bubble-gradient")
+            .attr("cx", "10%")
+            .attr("cy", "50%")
+            .attr("r", "50%");
+
+        gradient.append("stop")
+            .attr("offset", "0%")
+            .attr("stop-color", "#3498db");
+
+        gradient.append("stop")
+            .attr("offset", "100%")
+            .attr("stop-color", "rgba(137, 207, 235, 0.75)");
+
+        const categories = [
+            "Curiosity and Critical Thinking",
+            "Strategic Thinking",
+            "Communication and Evangelism",
+            "Leadership and Consciousness",
+            "Collaboration",
+            "Driving Outcomes",
+            "Company, Product and Domain Knowledge",
+            "Technology and Data Fundamentals",
+            "Business Acumen",
+            "Discovery"
+        ];
+
+        const angleSlice = Math.PI * 2 / categories.length;
+
+        console.log("Drawing axis lines and labels...");
+        categories.forEach((d, i) => {
+            const angle = i * angleSlice;
+            svg.append("line")
+                .attr("x1", 0)
+                .attr("y1", 0)
+                .attr("x2", radius * Math.cos(angle - Math.PI/2))
+                .attr("y2", radius * Math.sin(angle - Math.PI/2))
+                .attr("stroke", "rgba(137, 207, 235, 0.50)")
+                .attr("stroke-width", 1);
+
+            const labelRadius = radius + 10;
+            const x = labelRadius * Math.cos(angle - Math.PI/2);
+            const y = labelRadius * Math.sin(angle - Math.PI/2);
+            svg.append("text")
+                .attr("x", x)
+                .attr("y", y)
+                .attr("text-anchor", (Math.cos(angle - Math.PI/2) < 0) ? "end" : "start")
+                .attr("dominant-baseline", "central")
+                .style("font-size", "12px")
+                .style("fill", "#555")
+                .text(d);
+        });
+
+        console.log("Drawing circular grid lines...");
+        const gridLevels = 5;
+        for (let i = 1; i <= gridLevels; i++) {
+            const gridRadius = (radius / gridLevels) * i;
+            svg.append("circle")
+                .attr("cx", 0)
+                .attr("cy", 0)
+                .attr("r", gridRadius)
+                .attr("fill", "none")
+                .attr("stroke", "rgba(137, 207, 235, 0.50)")
+                .attr("stroke-width", 1);
+
+            svg.append("text")
+                .attr("x", 5)
+                .attr("y", -gridRadius)
+                .attr("text-anchor", "start")
+                .attr("dominant-baseline", "middle")
+                .style("font-size", "10px")
+                .style("fill", "#888")
+                .text((i * 2).toString());
+        }
+
+        const radialScale = d3.scaleLinear()
+            .domain([0, 10])
+            .range([0, radius]);
+
+        let data = new Array(categories.length).fill(5);
+
+        const lineGenerator = d3.lineRadial()
+            .angle((d, i) => i * angleSlice)
+            .radius(d => radialScale(d))
+            .curve(d3.curveCatmullRomClosed);
+
+        console.log("Creating main path...");
+        const path = svg.append("path")
+            .datum(data)
+            .attr("fill", "url(#bubble-gradient)")
+            .attr("stroke", "rgba(137, 207, 235, 0.56)")
+            .attr("stroke-width", 2);
+
+        function updateChart(includeValues = false) {
+            console.log("Updating chart...");
+            data = categories.map(cat => {
+                const input = document.getElementById(cat.split(" ")[0].toLowerCase());
+                return input ? +input.value : 5;
+            });
+            
+            path.transition()
+                .duration(500)
+                .attr("d", lineGenerator(data));
+
+            svg.selectAll(".value-label").remove();
+            svg.selectAll(".category-label").remove();
+
+            if (includeValues) {
+            categories.forEach((d, i) => {
+                const angle = i * angleSlice;
+                const value = data[i];
+                const labelRadius = radius + 20; // Increased radius for labels
+                let x = labelRadius * Math.cos(angle - Math.PI/2);
+                let y = labelRadius * Math.sin(angle - Math.PI/2);
+                
+                const isLeftSide = Math.cos(angle - Math.PI/2) < 0;
+                    
+                    // Adjust positioning for better alignment
+                    if (isLeftSide) {
+                        x += 10;
+                    } else {
+                        x += 10;
+                    }
+
+                // Add value label
+                const categoryLabel = svg.append("text")
+                        .attr("class", "category-label export-label")
+                        .attr("x", x)
+                        .attr("y", y)
+                        .attr("text-anchor", isLeftSide ? "end" : "start")
+                        .attr("dominant-baseline", "central")
+                        .style("font-family", "Roboto, sans-serif")
+                        .style("font-size", "12px")
+                        .style("fill", "#555")
+                        .text(d);
+
+                    // Value label
+                const valueLabel = svg.append("text")
+                        .attr("class", "value-label export-label")
+                        .attr("y", y)
+                        .attr("dominant-baseline", "central")
+                        .style("font-family", "Roboto, sans-serif")
+                        .style("font-size", "12px")
+                        .style("fill", "#555")
+                        .style("font-weight", "bold")
+                        .text(value);
+              
+                const categoryBox = categoryLabel.node().getBBox();
+                const valueX = isLeftSide ? x - categoryBox.width - 5 : x + categoryBox.width + 5;
+                    valueLabel.attr("x", valueX)
+                              .attr("text-anchor", isLeftSide ? "end" : "start");
+            });
+        } else {
+            // Restore original category labels without values
+            categories.forEach((d, i) => {
+                const angle = i * angleSlice;
+                const labelRadius = radius + 10;
+                const x = labelRadius * Math.cos(angle - Math.PI/2);
+                const y = labelRadius * Math.sin(angle - Math.PI/2);
+
+                svg.append("text")
+                        .attr("class", "category-label")
+                        .attr("x", x)
+                        .attr("y", y)
+                        .attr("text-anchor", (Math.cos(angle - Math.PI/2) < 0) ? "end" : "start")
+                        .attr("dominant-baseline", "central")
+                        .style("font-size", "12px")
+                        .style("fill", "#555")
+                        .text(d);
+                });
+            }
+        }
+
+        console.log("Setting up event listeners...");
+        categories.forEach(cat => {
+            const inputId = cat.split(" ")[0].toLowerCase();
+            const input = document.getElementById(inputId);
+            const valueInput = document.getElementById(`${inputId}-value`);
+            if (input && valueInput) {
+                input.addEventListener("input", () => {
+                    valueInput.value = input.value;
+                    updateChart();
+                    animateBubble();
+                });
+                valueInput.addEventListener("input", () => {
+                    input.value = valueInput.value;
+                    updateChart();
+                    animateBubble();
+                });
+            } else {
+                console.error(`Failed to find input elements for category: ${cat}`);
+            }
+        });
+
+        console.log("Initial chart update...");
+        updateChart();
+
+        function animateBubble() {
+            const jitter = 0.5;
+            const animatedData = data.map(d => d + (Math.random() - 0.5) * jitter);
+            
+            path.transition()
+                .duration(2000)
+                .ease(d3.easeLinear)
+                .attr("d", lineGenerator(animatedData))
+                .on("end", animateBubble);
+        }
+
+        console.log("Starting bubble animation...");
+        animateBubble();
+
+        function exportSVG() {
+            updateChart(true);
+            
+            const svgData = new XMLSerializer().serializeToString(document.querySelector("svg"));
+            const svgBlob = new Blob([svgData], {type: "image/svg+xml;charset=utf-8"});
+            const svgUrl = URL.createObjectURL(svgBlob);
+            
+            const downloadLink = document.createElement("a");
+            downloadLink.href = svgUrl;
+            downloadLink.download = "pm_growth_bubble.svg";
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+            
+            updateChart(false);
+        }
+
+        function exportPNG() {
+          const textElements = document.querySelectorAll('text[dominant-baseline="central"]'); 
+          textElements.forEach(text => {
+            text.remove();
+          });
+            updateChart(true);
+            
+            const svg = document.querySelector("svg");
+            const svgData = new XMLSerializer().serializeToString(svg);
+            
+            const scaleFactor = 2;
+            const canvas = document.createElement("canvas");
+            canvas.width = width * scaleFactor;
+            canvas.height = (height + 100) * scaleFactor;
+
+            const ctx = canvas.getContext("2d");
+            ctx.scale(scaleFactor, scaleFactor);
+
+            const img = new Image();
+            const svgBlob = new Blob([svgData], {type: "image/svg+xml;charset=utf-8"});
+            const url = URL.createObjectURL(svgBlob);
+
+            img.onload = function() {
+                ctx.fillStyle = "#FFFFFF";
+                ctx.fillRect(0, 0, canvas.width / scaleFactor, canvas.height / scaleFactor);
+
+                ctx.drawImage(img, 0, 0);
+
+                ctx.fillStyle = "#3498db";
+                ctx.font = "bold 36px 'Roboto', sans-serif";
+                ctx.textAlign = "center";
+                ctx.fillText(`${userName}'s PM Growth Bubble`, width / 2, 50);
+                
+                const pngUrl = canvas.toDataURL("image/png");
+                const downloadLink = document.createElement("a");
+                downloadLink.href = pngUrl;
+                downloadLink.download = "pm_growth_bubble_high_res.png";
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+                
+                updateChart(false);
+            };
+            img.src = url;
+        }
+
+        console.log("Setting up export button event listeners...");
+        document.getElementById("download-png").addEventListener("click", exportPNG);
+
+        console.log("Chart initialization complete");
+    } catch (error) {
+        console.error("An error occurred while initializing the chart:", error);
+    }
+});
+    </script>
+</body>
+</html>
