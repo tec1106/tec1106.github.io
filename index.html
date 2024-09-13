@@ -52,7 +52,7 @@
             width: 80%;
         }
         input[type="range"] {
-            width: 80%;
+            width: 90%;
             margin-top: 5px;
             accent-color: rgba(37, 146, 219);
            -webkit-appearance: none;
@@ -69,8 +69,10 @@
             font-size: 36px;
             font-weight: 800;
             margin-left: auto;
-            color: rgba(37, 146, 219)
-             
+            color: rgba(37, 146, 219)             
+        }
+        input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+                -webkit-appearance: none;
         }
         #chart {
             width: 910px;
@@ -102,7 +104,6 @@
         .label-group {
           display: flex;
           flex-direction: row;
-          width: 90%;
         }
         .export-label {
             font-family: 'Roboto', sans-serif;
@@ -147,7 +148,7 @@
             <div class="input-group">
                 <div class="label-group">
                   <label for="strategic">Strategic Thinking</label>
-                  <input type="number" id="strategic-value" min="0" max="10" value="5">
+                  <input type="number" id="strategic-value" min="0" max="10" value="5" readonly>
                 </div>
                 <input type="range" id="strategic" min="0" max="10" value="5" step="1">        
             </div>
