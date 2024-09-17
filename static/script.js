@@ -205,7 +205,7 @@ document.addEventListener('DOMContentLoaded', function() {
                      // Add current date and time
                     const now = new Date();
                     const dateTimeString = now.toLocaleString();
-                    ctx.fillStyle = "#000000";
+                    ctx.fillStyle = "#333";
                     ctx.font = "10px 'Roboto', sans-serif";
                     ctx.fillText(dateTimeString, width / 2, 65);
 

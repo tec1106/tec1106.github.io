@@ -1,5 +1,5 @@
 # Strategic Thinking
-They understand the big picture. They has a solid strategic rationale on why the team is trying to solve a customer
+They understand the big picture. They have a solid strategic rationale on why the team is trying to solve a customer
 problem in a certain way. It’s clear how they intends to make the product vision a reality, while meeting Element Logics
 business needs. They clearly articulates the desired impact of their team’s decisions, the outcomes leading to it, and
 the outputs that will drive those outcomes.
