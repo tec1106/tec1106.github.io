@@ -3,33 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PM Growth Bubble</title>
+    <title>Designers Growth Bubble</title>
     <script>
-        const title = 'PM'
+        const title = 'Designer'
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.0.2/marked.min.js"></script>
-   
+
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/static/style.css">  
-    
+    <link rel="stylesheet" type="text/css" href="../static/style.css">  
 </head>
 <body>
-    
-    
     <div class="tabs">
-        <a href="index.html" class="tab active">PM</a>
-        <a href="designer/" class="tab">Designer</a>
+        <a href="../index.html" class="tab">PM</a>
+        <a href="index.html" class="tab active">Designer</a>
     </div>
     <div class="container">
-        <h1 id="chartTitle">The PM Growth Bubble</h1>
+        <h1 id="chartTitle">The Designers Growth Bubble</h1>
         <div id="chart"></div>
+        
         <div class="legend">
-        <div class="legendColor Current"></div>
-        <span>Current</span>
-        <div class="legendColor Goal"></div>
-        <span>Goal</span>
+            <div class="legendColor Current"></div>
+            <span>Current</span>
+            <div class="legendColor Goal"></div>
+            <span>Goal</span>
         </div>
+
         <div id="inputsContainer" class="inputs"></div>
         <div class="buttons">
             <button id="download-png">Download PNG</button>
@@ -48,10 +47,13 @@
         </div>
     </div>
 
+    <script src="/static/showModal.js"></script>
     <script src="/static/script.js"></script>
     <script src="/static/promptForName.js"></script>
     <script src="/static/exportPNG.js"></script>
-    <script src="/static/showModal.js"></script>
+    
     <script src="/static/generateInputGroups.js"></script>
     
+
+</body>
 </html>
