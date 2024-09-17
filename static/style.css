@@ -166,14 +166,23 @@ button:hover {
     background-color: rgba(0,0,0,0.4);
 }
 .modal-content {
+    color: #555555;
     background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
+    margin: 2% auto 15% auto;
+    padding: 48px;
     border: 1px solid #888;
     width: 80%;
     max-width: 600px;
     border-radius: 10px;
 }
+.modal-content p, li {
+    font-weight: 100;
+}
+
+.modal-content h2 {
+    font-size: 20px;
+}
+
 .close {
     color: #aaa;
     float: right;

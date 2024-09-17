@@ -81,6 +81,7 @@ function showModal(category) {
     const closeBtn = document.getElementsByClassName('close')[0];
 
     const firstWord = category.split(/[ ,]+/)[0].toLowerCase();
+    console.log(firstWord)
     fetch(`text/${firstWord}.md`)
         .then(response => response.text())
         .then(text => {

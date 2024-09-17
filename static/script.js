@@ -24,10 +24,6 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .catch(error => console.error('Error loading categories:', error));
 
-        function showModals() {
-            showModal(category);
-        }
-
         function initializeChart() {
             const width = 910;
             const height = 600;
@@ -173,19 +169,17 @@ document.addEventListener('DOMContentLoaded', function() {
                     .text((i * 2).toString());
             }
 
-            generateInputGroups(categories, updateChart, showModals);
+            generateInputGroups(categories, updateChart, showModal);
 
             
             
 
             function exportPNG() {
                 
-                updateChart(true);
-                
                 const svg = document.querySelector("svg");
                 const svgData = new XMLSerializer().serializeToString(svg);
                 
-                const scaleFactor = 2;
+                const scaleFactor = 4;
                 const canvas = document.createElement("canvas");
                 canvas.width = width * scaleFactor;
                 canvas.height = (height + 100) * scaleFactor;
@@ -201,23 +195,44 @@ document.addEventListener('DOMContentLoaded', function() {
                     ctx.fillStyle = "#FFFFFF";
                     ctx.fillRect(0, 0, canvas.width / scaleFactor, canvas.height / scaleFactor);
             
-                    ctx.drawImage(img, 0, 0);
+                    ctx.drawImage(img, 0, 32);
             
                     ctx.fillStyle = "#3498db";
                     ctx.font = "bold 36px 'Roboto', sans-serif";
                     ctx.textAlign = "center";
-                    console.log(exportHeading + "t4et");
                     ctx.fillText(exportHeading, width / 2, 50);
+
+                     // Add current date and time
+                    const now = new Date();
+                    const dateTimeString = now.toLocaleString();
+                    ctx.fillStyle = "#000000";
+                    ctx.font = "10px 'Roboto', sans-serif";
+                    ctx.fillText(dateTimeString, width / 2, 65);
+
+                    // Add legend
+                    const legendY = height + 20;
+                    ctx.font = "16px 'Roboto', sans-serif";
+                    ctx.textAlign = "left";
+                    
+                    // Current (Blue) legend item
+                    ctx.fillStyle = "#3498db";
+                    ctx.fillRect(width / 2 - 100, legendY, 20, 20);
+                    ctx.fillStyle = "#000000";
+                    ctx.fillText("Current", width / 2 - 70, legendY + 15);
+                    
+                    // Goal (Green) legend item
+                    ctx.fillStyle = "rgba(144, 238, 144, 0.8)";
+                    ctx.fillRect(width / 2 + 50, legendY, 20, 20);
+                    ctx.fillStyle = "#000000";
+                    ctx.fillText("Goal", width / 2 + 80, legendY + 15);
                     
                     const pngUrl = canvas.toDataURL("image/png");
                     const downloadLink = document.createElement("a");
                     downloadLink.href = pngUrl;
-                    downloadLink.download = "pm_growth_bubble_high_res.png";
+                    downloadLink.download = exportHeading + ".png";
                     document.body.appendChild(downloadLink);
                     downloadLink.click();
                     document.body.removeChild(downloadLink);
-                    
-                    updateChart(false);
                 };
                 img.src = url;
             }
