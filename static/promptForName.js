@@ -4,7 +4,8 @@ function promptForName() {
     const submitButton = document.getElementById('submitName');
     const chartTitle = document.getElementById('chartTitle');
 
-    namePrompt.style.display = 'block';
+    namePrompt.style.display = 'flex';
+    document.getElementById("nameInput").focus();
 
     return new Promise((resolve) => {
         submitButton.addEventListener('click', function() {

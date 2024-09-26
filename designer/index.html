@@ -1,37 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Designers Growth Bubble</title>
-    <script>
-        const title = 'Designer'
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.0.2/marked.min.js"></script>
-
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../static/style.css">  
-</head>
-<body>
-    <div class="tabs">
-        <a href="../index.html" class="tab">PM</a>
-        <a href="index.html" class="tab active">Designer</a>
-    </div>
-    <div class="container">
-        <h1 id="chartTitle">The Designers Growth Bubble</h1>
-        <div id="chart"></div>
-        
-        <div class="legend">
-            <div class="legendColor Current"></div>
-            <span>Current</span>
-            <div class="legendColor Goal"></div>
-            <span>Goal</span>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Designers Growth Bubble</title>
+        <script>
+            const title = 'Designer'
+        </script>
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.0.2/marked.min.js"></script>
+       <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+       <link href="https://fonts.googleapis.com/css2?family=Rufina:wght@400;700&display=swap" rel="stylesheet">
+       <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Rufina:wght@400;700&display=swap" rel="stylesheet">
+       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+       <link rel="stylesheet" type="text/css" href="../static/style.css">  
+       
+    </head>
+    <body>
+        <div class="container">
+        <div class="tabs">
+            <a href="../index.html" class="tab">PM</a>
+            <a href="index.html" class="tab active">Designer</a>
         </div>
-
+        <div class="top">
+            <h1 id="chartTitle">The PM Growth Bubble</h1>
+            <div class="buttons download">
+                <button id="download-png">
+                <span class="material-symbols-outlined downloadIcon">download</span>
+                Download
+            </button>
+            </div>
+        </div>
+        <div id="chart"></div>
+        <div class="legend">
+        <div class="legendColor Current"></div>
+        <span>Current</span>
+        <div class="legendColor Goal"></div>
+        <span>Goal</span>
+        </div>
         <div id="inputsContainer" class="inputs"></div>
-        <div class="buttons">
-            <button id="download-png">Download PNG</button>
         </div>
     </div>
 
@@ -47,13 +54,10 @@
         </div>
     </div>
 
-    <script src="/static/showModal.js"></script>
-    <script src="/static/script.js"></script>
-    <script src="/static/promptForName.js"></script>
-    <script src="/static/exportPNG.js"></script>
-    
-    <script src="/static/generateInputGroups.js"></script>
-    
+    <script src="../static/script.js"></script>
+    <script src="../static/promptForName.js"></script>
+    <script src="../static/generateInputGroups.js"></script>
+    <script src="../static/backgroundChanger.js"></script>
 
-</body>
+    </body>
 </html>

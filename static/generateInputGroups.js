@@ -1,14 +1,26 @@
 function generateInputGroups(categories, updateChart) {
 
-    const inputMin = '0';
-    const inputMax = '10';
-    const inputDefault = '5';
-    const goalDefault = '5';
+    const inputMin = '1';
+    const inputMax = '6';
+    const inputDefault = '2';
+    const goalDefault = '3';
     const inputStep = '1';
 
     const inputsContainer = document.getElementById('inputsContainer');
 
     console.log(categories)
+
+    function updateInputColor(input) {
+        const value = parseInt(input.value);
+        input.classList.remove('input-light-blue', 'input-medium-blue', 'input-dark-blue');
+        if (value >= 1 && value <= 2) {
+            input.classList.add('input-light-blue');
+        } else if (value >= 3 && value <= 4) {
+            input.classList.add('input-medium-blue');
+        } else if (value >= 5 && value <= 6) {
+            input.classList.add('input-dark-blue');
+        }
+    }
 
     categories.forEach(category => {
         console.log(category);
@@ -64,14 +76,17 @@ function generateInputGroups(categories, updateChart) {
         // Sync current sliders with number inputs
         currentRange.addEventListener('input', () => {
             currentInput.value = currentRange.value;
+            updateInputColor(currentInput);
         });
         currentInput.addEventListener('input', () => {
             currentRange.value = currentInput.value;
+            updateInputColor(currentInput);
         });
 
         // Update chart when sliders change
         currentRange.addEventListener('input', updateChart);
         goalRange.addEventListener('input', updateChart);
+        updateInputColor(currentInput);
     });
 }
 

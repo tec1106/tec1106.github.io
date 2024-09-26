@@ -3,9 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log("DOM content loaded, initializing chart...");
 
         let categories = [];
-        let updateChart;
         let currentValues = [];
-        let userName = "";
         let exportHeading = "";
 
         promptForName().then(userName => {
@@ -25,10 +23,10 @@ document.addEventListener('DOMContentLoaded', function() {
         .catch(error => console.error('Error loading categories:', error));
 
         function initializeChart() {
-            const width = 910;
-            const height = 600;
+            const width = 940;
+            const height = 500;
             const margin = 100;
-            const radius = Math.min(width, 800) / 2.4 - margin;
+            const radius = Math.min(width, 800) / 2.5 - margin;
 
             const svg = d3.select("#chart")
                 .append("svg")
@@ -54,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 .attr("stop-color", "rgba(137, 207, 235, 0.75)");
 
             const radialScale = d3.scaleLinear()
-                .domain([0, 10])
+                .domain([0, 6])
                 .range([0, radius]);
 
             const angleSlice = Math.PI * 2 / categories.length;
@@ -77,10 +75,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 .curve(d3.curveCatmullRomClosed);
 
             function updateChart(forExport = false) {
-                // Update currentValues array
                 currentValues = categories.map((category, i) => {
                     const input = document.getElementById(category.split(/[ ,]+/)[0].toLowerCase());
-                    return input ? +input.value : 5;  // default to 5 if input not found
+                    return input ? +input.value : 3;  // default to 3 if input not found
                 });
 
                 data.forEach((d, i) => {
@@ -109,11 +106,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 // Update or redraw category labels for export
                 drawCategoryLabels(forExport);
-            }
+
+                
+            }   
 
             function drawCategoryLabels(forExport = true) {
                 svg.selectAll(".category-label").remove();
-
                 categories.forEach((d, i) => {
                     const angle = i * angleSlice;
                     svg.append("line")
@@ -121,10 +119,10 @@ document.addEventListener('DOMContentLoaded', function() {
                         .attr("y1", 0)
                         .attr("x2", radius * Math.cos(angle - Math.PI / 2))
                         .attr("y2", radius * Math.sin(angle - Math.PI / 2))
-                        .attr("stroke", "rgba(137, 207, 235, 0.50)")
+                        .attr("stroke", "rgba(137, 207, 235, 0.15)")
                         .attr("stroke-width", 1);
 
-                    const labelRadius = radius + 10;
+                    const labelRadius = radius + 8;
                     const x = labelRadius * Math.cos(angle - Math.PI / 2);
                     const y = labelRadius * Math.sin(angle - Math.PI / 2);
 
@@ -139,15 +137,15 @@ document.addEventListener('DOMContentLoaded', function() {
                         .attr("y", y)
                         .attr("text-anchor", (Math.cos(angle - Math.PI / 2) < 0) ? "end" : "start")
                         .attr("dominant-baseline", "central")
-                        .style("font-size", "12px")
+                        .style("font-size", "16px")
                         .style("fill", "#555")
-                        .style("font-family", "Roboto, sans-serif")
+                        .style("font-family", "DM Serif Display, serif")
                         .text(labelText);
                 });
             }
 
             // Drawing circular grid lines
-            const gridLevels = 5;
+            const gridLevels = 3;
             for (let i = 1; i <= gridLevels; i++) {
                 const gridRadius = (radius / gridLevels) * i;
                 svg.append("circle")
@@ -155,18 +153,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     .attr("cy", 0)
                     .attr("r", gridRadius)
                     .attr("fill", "none")
-                    .attr("stroke", "rgba(137, 207, 235, 0.50)")
+                    .attr("stroke", "rgba(137, 207, 235, 0.15)")
                     .attr("stroke-width", 1);
 
-                svg.append("text")
-                    .attr("x", 5)
-                    .attr("y", -gridRadius)
-                    .attr("text-anchor", "start")
-                    .attr("dominant-baseline", "middle")
-                    .style("font-size", "10px")
-                    .style("fill", "#888")
-                    .style("font-family", "Roboto, sans-serif")
-                    .text((i * 2).toString());
+                
             }
 
             generateInputGroups(categories, updateChart, showModal);
@@ -176,11 +166,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
             function exportPNG() {
                 
+                const font = "DM Serif Display, sans-serif";
                 const svg = document.querySelector("svg");
                 const svgData = new XMLSerializer().serializeToString(svg);
-                
                 const scaleFactor = 4;
                 const canvas = document.createElement("canvas");
+
                 canvas.width = width * scaleFactor;
                 canvas.height = (height + 100) * scaleFactor;
             
@@ -195,10 +186,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     ctx.fillStyle = "#FFFFFF";
                     ctx.fillRect(0, 0, canvas.width / scaleFactor, canvas.height / scaleFactor);
             
-                    ctx.drawImage(img, 0, 32);
+                    // Change to position the chart horizontally and vertically
+                    ctx.drawImage(img, 0, 64);
             
                     ctx.fillStyle = "#3498db";
-                    ctx.font = "bold 36px 'Roboto', sans-serif";
+                    ctx.font = "bold 36px " + font;
                     ctx.textAlign = "center";
                     ctx.fillText(exportHeading, width / 2, 50);
 
@@ -206,12 +198,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     const now = new Date();
                     const dateTimeString = now.toLocaleString();
                     ctx.fillStyle = "#333";
-                    ctx.font = "10px 'Roboto', sans-serif";
+                    ctx.font = "10px " + font;
                     ctx.fillText(dateTimeString, width / 2, 65);
 
                     // Add legend
-                    const legendY = height + 20;
-                    ctx.font = "16px 'Roboto', sans-serif";
+                    const legendY = height + 64;
+                    ctx.font = "16px " + font;
                     ctx.textAlign = "left";
                     
                     // Current (Blue) legend item
