@@ -235,7 +235,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Set up export button event listeners
             document.getElementById("download-png").addEventListener("click", exportPNG);
-            document.getElementById("generalInfo").addEventListener('click', () => showModal("../../text/generalInfo"));
+            document.getElementById("generalInfo").addEventListener('click', () => showModal("generalInfo"));
         }
 
     } catch (error) {
