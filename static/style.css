@@ -329,6 +329,13 @@ button:hover {
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
 }
 
+.version {
+    color: #ffffff;
+    position: fixed;
+    bottom: 8px;
+    left: 16px;
+}
+
 .sky-gradient {
     position: relative;
     z-index: 1;

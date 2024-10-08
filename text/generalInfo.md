@@ -26,6 +26,7 @@ Reflect on each dimension and think about:
 - It’s importance to the work you’re doing now and your long-term goals
 - Where you see yourself today (actual level) 
 - Your desired (or needed) level
+- Download when you're done
 
 Use the following scale to drive the reflection/conversation:
 1. New to the topic
@@ -33,3 +34,6 @@ Use the following scale to drive the reflection/conversation:
 3. Doing well, applied a few time
 4. Overperforming in various settings
 5. Known for this
+
+## Important information
+No information is saved or stored in a database. To share, you must download a file (.png). If you refresh, your progress is lost. There is not name checking, so any name can be entered.
