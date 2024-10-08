@@ -11,16 +11,16 @@ function getArchbeePages() {
     });
 
     const requestOptions = {
-        method: "POST",
+        method: "GET",
         headers: myHeaders,
         body: raw,
         redirect: "follow"
     };
 
     fetch("https://app.archbee.com/api/public-api/doc", requestOptions)
-        .then((response) => response.text())
-        .then((result) => console.log(result))
-        .catch((error) => console.error(error));
+    .then((response) => response.text())
+    .then((result) => console.log(result))
+    .catch((error) => console.error(error));
 }
 
 getArchbeePages();

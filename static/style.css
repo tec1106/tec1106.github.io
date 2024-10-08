@@ -1,5 +1,5 @@
 body {
-    font-family: "Spectral", "PT Serif", sans-serif;
+    font-family: "Lato", "Spectral", "PT Serif", sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -242,10 +242,10 @@ button:hover {
     color: #555555;
     background-color: #fefefe;
     margin: 2% auto 15% auto;
-    padding: 48px 56px;
+    padding: 48px 88px;
     border: 1px solid #888;
-    width: 80%;
-    max-width: 800px;
+    width: 75%;
+    max-width: 704px;
     border-radius: 10px;
 }
 
@@ -254,7 +254,9 @@ button:hover {
 }
 
 .modal-content h2 {
-    font-size: 20px;
+    font-family: "Playfair Display";
+    font-size: 18px;
+    color: rgba(37, 146, 219);
 }
 
 .modal-content p, li {

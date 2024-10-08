@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         .attr("dominant-baseline", "central")
                         .style("font-size", "16px")
                         .style("fill", "#555")
-                        .style("font-family", "DM Serif Display, serif")
+                        .style("font-family", "Lato, sans-serif")
                         .text(labelText);
                 });
             }
@@ -166,7 +166,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             function exportPNG() {
                 
-                const font = "DM Serif Display, sans-serif";
+                const font = "Lato, sans-serif";
                 const svg = document.querySelector("svg");
                 const svgData = new XMLSerializer().serializeToString(svg);
                 const scaleFactor = 4;

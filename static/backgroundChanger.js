@@ -27,7 +27,7 @@ let currentTime = new Date();
             const gradientIndex = getGradientIndex(hour, minute);
             const gradientClass = `sky-gradient-${gradientIndex.toString().padStart(2, '0')}`;
             document.body.className = gradientClass;
-            document.getElementById('timeDisplay').textContent = `Current Time: ${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
+            //document.getElementById('timeDisplay').textContent = `Current Time: ${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
         }
 
         function changeBackground(direction) {

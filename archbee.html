@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>PM Growth Bubble</title>
+        <script>
+            const title = 'PM'
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.0.2/marked.min.js"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        <link rel="stylesheet" type="text/css" href="/static/style.css">  
+        
+    </head>
+    <body>
+        <script>
+            window._archbee = window._archbee || {
+              queue: [],
+              push: function (x) {window._archbee.queue.push(x)}
+            };
+          
+            window._archbee.push({
+              eventType: "init",
+              spaceId: "PUBLISHED-zHs2ljS7tKP7CbcSoNmbk",
+              // blockId: "..."  --- optional
+              // anchor: "..." --- optional
+              // bubble: "ask" --- optional
+              // loadingStrategy: "..." --- optional
+              // widgetType: "search"
+              // className: "..." --- optional
+              // check docs for the entire list of configs
+            });
+          </script>
+          <script async src="https://widget.archbee.com/v1"></script>
+        <script>
+            const openAbWidget = () => {
+                window._archbee.push({
+                    eventType: "show-widget",
+                    // optional, only for loading a specific doc
+                    // and scroll to section
+                    // docId: `PUBLISHED-${docId}`,
+                    // blockId: "TBMm9"
+                });
+            }
+            openAbWidget();
+        </script>
+    </body>
+</html>
