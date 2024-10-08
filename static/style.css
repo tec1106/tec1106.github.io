@@ -30,6 +30,7 @@ text {
     display: flex;
     flex-direction: row;
     align-content: center;
+    align-items: center;
 }
 
 
@@ -63,13 +64,14 @@ button {
 
 #download-png {
     font-size: 20px;
-    padding: 8px 16px;
+    padding: 8px 0px;
     background-color: rgba(0, 0, 0, 0);
     color: rgba(37, 146, 219);
 }
-.download {
+.tools {
     position: absolute;
     display: flex;
+    align-items: center;
     right: 32px;
     top: 18px;
 }
@@ -217,16 +219,21 @@ button:hover {
     border: none;
 }
 .question-mark {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
     font-size: 16px;
     background-color: rgba(37, 146, 219, 1);
     color: #ffffff;
     border: rgba(37, 146, 219, 0.3) solid 1px;
-    min-width: 24px;
-    aspect-ratio: 1;
+    width: 24px;
+    height: 24px;
     text-align: center;
     border-radius: 50%;
 }
+
 .modal {
     display: none;
     position: fixed;
