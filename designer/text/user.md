@@ -1,14 +1,12 @@
-# Business Understanding
+# User research and analysis
 
 They understand that great ideas alone are not enough. They use ideas to create value for customers and capture that value effectively with sustainable and profitable business models. 
 
 
 ## Level 1–2: Basic
-- They have a basic understanding of how the business operates but rarely connects product ideas with long-term profitability.
-- They seek to learn about the various areas of the business including marketing, sales, finance, services, privacy, legal, partners, and so on.
-- They may understand customer value but rarely translate this into sustainable business models.
-- They are unfamiliar with key financial metrics, such as product P&L, and how these influence product decisions.
-- They tend to focus on delivering features or immediate results without fully considering the broader business context or long-term sustainability.
+- **Research & User testing**: Basic understanding of user research methods, can conduct simple usability tests under supervision.
+- **Analytics & data interpretation**: Basic understanding of user data. Needs guidance to analyze metrics and apply insights..
+- **Product & domain knowledge**: Basic understanding of the product and its users. Limited knowledge of the industry or domain specifics.
 
 
 ## Level 3–4: Intermediate
